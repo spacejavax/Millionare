@@ -14,6 +14,12 @@ clock = pygame.time.Clock()
 title_font = pygame.font.Font(None, 64)
 text_font = pygame.font.Font(None, 34)
 
+companies = [
+    {"name": "Bigbanana", "price": 50},
+    {"name": "BubbleUnicorn", "price": 70},
+    {"name": "GummyBear", "price": 150}
+]
+
 
 async def main():
     running = True
@@ -43,6 +49,18 @@ async def main():
 
         screen.blit(title, (275, 80))
         screen.blit(balance, (350, 180))
+
+        y_position = 250
+        for company in companies:
+            company_text = text_font.render(
+                f"{company['name']} ${company['price']}",
+                True,
+                (125, 85, 145)
+                )
+            screen.blit(company_text, (180, y_position))
+
+            y_position += 60
+        
 
         pygame.display.flip()
 
