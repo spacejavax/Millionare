@@ -195,9 +195,18 @@ async def main():
 
             risk_text=small_font.render(f"Risk:{company['risk']}", True, GRAY)
             price_text = text_font.render(f"${company['price']}", True, DARK_PURPLE)
+
+            if company["change"] >= 0:
+                change_color = GREEN
+                change_value = f"+${company['change']}"
+            else:
+                change_color = RED
+                change_value = f"-${abs(company['change'])}"
+            change_text = text_font.render(change_value, True, change_color)
             screen.blit(name_text, (140, card_y + 23))
             screen.blit(risk_text, (140, card_y + 53))
             screen.blit(price_text, (330, card_y + 34))
+            screen.blit(change_text, (420, card_y + 34))
 
             card_y +=110
 
