@@ -1,5 +1,6 @@
 import asyncio
 import pygame
+import random
 
 pygame.init()
 
@@ -20,9 +21,13 @@ companies = [
     {"name": "GummyBear:", "price": 150, "shares": 0, "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
 ]
 
-
+PRICE_UPDATE = pygame.USEREVENT + 1
+pygame.time.set_timer(PRICE_UPDATE, 3000)
 async def main():
     cash = 1000
+    day = 1
+    MAX_DAYS = 30
+    market_open = True
     running = True
 
     while running:
@@ -40,7 +45,17 @@ async def main():
                         elif company["sell_button"].collidepoint(event.pos):
                             if company["shares"] > 0:
                                 cash += company["price"]
-                                company["shares"] -= 1  
+                                company["shares"] -= 1
+            elif event.type == PRICE_UPDATE:
+                for company in companies:
+                    price_change = random.randint(-15, 15)
+                    company["price"] += price_change
+                    if company["price"] < 5:
+                        company["price"] = 5
+                day += 1
+                if day > MAX_DAYS:
+                    day = MAX_DAYS
+                    market_open = False  
 
     
         screen.fill((255, 232, 240))
@@ -56,7 +71,12 @@ async def main():
             True,
             (125, 85, 145)
         )
-
+        day_text = text_font.render(
+            f"Day: {day}/{MAX_DAYS}",
+            True,
+            (125, 85, 145)
+        )
+        screen.blit(day_text, (60, 180))
         screen.blit(title, (275, 80))
         screen.blit(balance, (350, 180))
 
