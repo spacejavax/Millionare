@@ -15,9 +15,9 @@ title_font = pygame.font.Font(None, 64)
 text_font = pygame.font.Font(None, 34)
 
 companies = [
-    {"name": "Bigbanana:", "price": 50},
-    {"name": "BubbleUnicorn:", "price": 70},
-    {"name": "GummyBear:", "price": 150}
+    {"name": "Bigbanana:", "price": 50, "shares": 0, "button": pygame.Rect(650, 245, 100, 40)},
+    {"name": "BubbleUnicorn:", "price": 70, "shares": 0, "button": pygame.Rect(650, 305, 100, 40)},
+    {"name": "GummyBear:", "price": 150, "shares": 0, "button": pygame.Rect(650, 365, 100, 40)}
 ]
 
 
@@ -31,6 +31,12 @@ async def main():
 
            
             if event.type == pygame.QUIT:
+                if event.type == pygame.MOUSEBUTTON:
+                    for company in companies:
+                        if company["button"].collidepoint(event.pos):
+                            if cash >= company["price"]:
+                                cash -= company["price"]
+                                company["shares"] +=1
                 running = False
 
     
@@ -58,8 +64,14 @@ async def main():
                 True,
                 (125, 85, 145)
                 )
+            shares_text = text_font.render(
+                f"Owned: {company['shares']}",
+                True,
+                (125, 85, 145)
+            )
+            screen.blit(shares_text, (470, y_position))
             screen.blit(company_text, (180, y_position))
-            buy_button = pygame.Rect(650, y_position - 5, 100, 40)
+            buy_button = company["button"]
             pygame.draw.rect(
                 screen,
                 (255, 145, 180),
