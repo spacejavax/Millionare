@@ -154,7 +154,7 @@ async def main():
             screen.blit(wealth_label, (610, 128))
             screen.blit(wealth_text, (610, 153))
 
-            screen.blit(small_font.render("COMPANY, True, GRAY"), (95,215))
+            screen.blit(small_font.render("COMPANY", True, GRAY), (95,215))
             screen.blit(small_font.render("PRICE", True, GRAY), (330, 215))
             screen.blit(small_font.render("CHANGE", True, GRAY), (420, 215))
             screen.blit(small_font.render("OWNED", True, GRAY), (525, 215))
