@@ -15,13 +15,14 @@ title_font = pygame.font.Font(None, 64)
 text_font = pygame.font.Font(None, 34)
 
 companies = [
-    {"name": "Bigbanana", "price": 50},
-    {"name": "BubbleUnicorn", "price": 70},
-    {"name": "GummyBear", "price": 150}
+    {"name": "Bigbanana:", "price": 50},
+    {"name": "BubbleUnicorn:", "price": 70},
+    {"name": "GummyBear:", "price": 150}
 ]
 
 
 async def main():
+    cash = 1000
     running = True
 
     while running:
@@ -42,7 +43,7 @@ async def main():
         )
 
         balance = text_font.render(
-            "Cash: $1,000",
+            f"Cash: ${cash}",
             True,
             (125, 85, 145)
         )
@@ -58,6 +59,20 @@ async def main():
                 (125, 85, 145)
                 )
             screen.blit(company_text, (180, y_position))
+            buy_button = pygame.Rect(650, y_position - 5, 100, 40)
+            pygame.draw.rect(
+                screen,
+                (255, 145, 180),
+                buy_button,
+                border_radius=12
+            )
+            buy_text = text_font.render(
+                "Buy",
+                True,
+                (255, 255, 255)
+            )
+
+            screen.blit(buy_text, (677, y_position + 2))
 
             y_position += 60
         
