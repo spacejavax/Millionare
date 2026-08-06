@@ -157,6 +157,37 @@ async def main():
             screen.blit(small_font.render("COPMANY, True, GRAY"), (95,215))
             screen.blit(small_font.render("PRICE", True, GRAY), (330, 215))
             screen.blit(small_font.render("CHANGE", True, GRAY), (420, 215))
+            screen.blit(small_font.render("OWNED", True, GRAY), (525, 215))
+
+            card_y = 235
+            for company in companies:
+                shadow = pygame.Rect(65, card_y + 5, 770, 90)
+                card = pygame.Rect(65, card_y, 770, 90)
+        pygame.draw.rect(
+            screen,
+            SHADOW,
+            shadow,
+            border_radius=17
+        )
+
+        pygame.draw.rect(
+            screen,
+            WHITE,
+            card,
+            border_radius=17
+        )
+
+        icon_center = (100, card_y + 45)
+
+        pygame.draw.circle(
+            screen,
+            LIGHT_PINK,
+            icon_center,
+            25
+        )
+
+
+            
         pygame.display.flip()
 
         clock.tick(60)
