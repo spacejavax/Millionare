@@ -16,6 +16,7 @@ title_font = pygame.font.Font(None, 54)
 heading_font = pygame.font.Font(None, 30)
 text_font = pygame.font.Font(None, 26)
 small_font = pygame.font.Font(None, 21)
+tiny_font = pygame.font.Font(None, 14)
 
 BACKGROUND = (250, 244, 248)
 WHITE = (255, 255, 255)
@@ -29,9 +30,9 @@ GRAY = (132, 119, 137)
 SHADOW = (230, 218, 226)
 
 companies = [
-    {"name": "Bigbanana:", "emoji": "🍌",  "price": 50, "shares": 0, "risk": 5, "change": 0, "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
-    {"name": "BubbleUnicorn:", "emoji": "🦄", "price": 70, "shares": 0, "risk": 15, "change": 0, "button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
-    {"name": "GummyBear:",  "emoji": "🐻", "price": 150, "shares": 0, "risk": 40, "change": 0, "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
+    {"name": "Bigbanana:", "emoji": ":P",  "price": 50, "shares": 0, "risk": 5, "change": 0, "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
+    {"name": "BubbleUnicorn:", "emoji": ":D", "price": 70, "shares": 0, "risk": 15, "change": 0, "button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
+    {"name": "GummyBear:",  "emoji": ":3", "price": 150, "shares": 0, "risk": 40, "change": 0, "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
 ]
 
 PRICE_UPDATE = pygame.USEREVENT + 1
@@ -184,7 +185,7 @@ async def main():
                 25
             )
 
-            company_emoji = heading_font.render(company["emoji"][0], True, PINK)
+            company_emoji = heading_font.render(company["emoji"], True, PINK)
 
 
             emoji_rect = company_emoji.get_rect(center=icon_center)
