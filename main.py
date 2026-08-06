@@ -1,6 +1,6 @@
-import asyncio
-import pygame
-import random
+import asyncio #pygbag
+import pygame #game window, buttons, text
+import random #unpredictable price changes
 
 pygame.init()
 
@@ -16,7 +16,6 @@ title_font = pygame.font.Font(None, 54)
 heading_font = pygame.font.Font(None, 30)
 text_font = pygame.font.Font(None, 26)
 small_font = pygame.font.Font(None, 21)
-tiny_font = pygame.font.Font(None, 14)
 
 BACKGROUND = (250, 244, 248)
 WHITE = (255, 255, 255)
@@ -31,7 +30,7 @@ SHADOW = (230, 218, 226)
 
 companies = [
     {"name": "Bigbanana:", "emoji": ":P",  "price": 50, "shares": 0, "risk": 5, "change": 0, "history": [50], "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
-    {"name": "BubbleUnicorn:", "emoji": ":D", "price": 70, "shares": 0, "risk": 15, "change": 0, "history": [75],"button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
+    {"name": "BubbleUnicorn:", "emoji": ":D", "price": 70, "shares": 0, "risk": 15, "change": 0, "history": [70],"button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
     {"name": "GummyBear:",  "emoji": ":3", "price": 150, "shares": 0, "risk": 40, "change": 0, "history": [150], "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
 ]
 
@@ -119,7 +118,7 @@ async def main():
                         company["price"] += price_change
                         if company["price"] < 5:
                             company["price"] = 5
-                            company["history"].append(company["price"])
+                        company["history"].append(company["price"])
                 day += 1
                 if day > MAX_DAYS:
                     day = MAX_DAYS
@@ -174,7 +173,7 @@ async def main():
                 summary_card,
                 border_radius=18
             )
-
+    
         cash_label = small_font.render("AVAILABLE CASH", True, GRAY)
         cash_text = heading_font.render(f"${cash}", True, DARK_PURPLE)
 
@@ -194,6 +193,7 @@ async def main():
         screen.blit(small_font.render("PRICE", True, GRAY), (330, 215))
         screen.blit(small_font.render("CHANGE", True, GRAY), (420, 215))
         screen.blit(small_font.render("OWNED", True, GRAY), (525, 215))
+        screen.blit(small_font.render("TREND", True, GRAY), (575, 215))
 
         card_y = 235
         for company in companies:
@@ -246,6 +246,34 @@ async def main():
             screen.blit(price_text, (330, card_y + 34))
             screen.blit(change_text, (420, card_y + 34))
             screen.blit(owned_text, (540, card_y + 34))
+
+            company["button"].update(
+                    650,
+                    card_y + 26,
+                    75,
+                    38
+                    )
+            
+            company["sell_button"].update(
+                    735,
+                    card_y + 26,
+                    75,
+                    38
+                    )
+            
+            draw_button(
+                    company["button"],
+                    PINK if market_open else GRAY,
+                    "Buy"
+                    )
+            
+            draw_button(
+                    company["sell_button"],
+                    PURPLE if market_open else GRAY,
+                    "Sell"
+                    )
+            
+            
 
             card_y +=110
 
