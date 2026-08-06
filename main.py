@@ -28,16 +28,16 @@ async def main():
     while running:
 
         for event in pygame.event.get():
-
-           
             if event.type == pygame.QUIT:
-                if event.type == pygame.MOUSEBUTTON:
+                            
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                     for company in companies:
                         if company["button"].collidepoint(event.pos):
                             if cash >= company["price"]:
                                 cash -= company["price"]
-                                company["shares"] +=1
-                running = False
+                                company["shares"] += 1
+               
 
     
         screen.fill((255, 232, 240))
