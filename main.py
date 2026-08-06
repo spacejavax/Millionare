@@ -203,10 +203,12 @@ async def main():
                 change_color = RED
                 change_value = f"-${abs(company['change'])}"
             change_text = text_font.render(change_value, True, change_color)
+            owned_text = text_font.render(str(company["shares"]), True, DARK_PURPLE)
             screen.blit(name_text, (140, card_y + 23))
             screen.blit(risk_text, (140, card_y + 53))
             screen.blit(price_text, (330, card_y + 34))
             screen.blit(change_text, (420, card_y + 34))
+            screen.blit(owned_text, (540, card_y + 34))
 
             card_y +=110
 
