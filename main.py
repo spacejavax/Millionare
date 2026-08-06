@@ -15,9 +15,9 @@ title_font = pygame.font.Font(None, 64)
 text_font = pygame.font.Font(None, 34)
 
 companies = [
-    {"name": "Bigbanana:", "price": 50, "shares": 0, "button": pygame.Rect(650, 245, 100, 40), "sell_button": pygame.Rect(700, 245, 90, 40)},
-    {"name": "BubbleUnicorn:", "price": 70, "shares": 0, "button": pygame.Rect(650, 305, 100, 40), "sell_button": pygame.Rect(700, 245, 90, 40)},
-    {"name": "GummyBear:", "price": 150, "shares": 0, "button": pygame.Rect(650, 365, 100, 40), "sell_button": pygame.Rect(700, 245, 90, 40)}
+    {"name": "Bigbanana:", "price": 50, "shares": 0, "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
+    {"name": "BubbleUnicorn:", "price": 70, "shares": 0, "button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
+    {"name": "GummyBear:", "price": 150, "shares": 0, "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
 ]
 
 
@@ -37,7 +37,10 @@ async def main():
                             if cash >= company["price"]:
                                 cash -= company["price"]
                                 company["shares"] += 1
-               
+                        elif company["sell_button"].collidepoint(event.pos):
+                            if company["shares"] > 0:
+                                cash += company["price"]
+                                company["shares"] -= 1  
 
     
         screen.fill((255, 232, 240))
@@ -71,7 +74,9 @@ async def main():
             )
             screen.blit(shares_text, (470, y_position))
             screen.blit(company_text, (180, y_position))
+
             buy_button = company["button"]
+            sell_button = company["sell_button"]
             pygame.draw.rect(
                 screen,
                 (255, 145, 180),
@@ -84,12 +89,14 @@ async def main():
                 (255, 255, 255)
             )
 
-            screen.blit(buy_text, (610, y_position + 2))
+            buy_text_rect = buy_text.get_rect(center=buy_button.center)
+            screen.blit(buy_text, buy_text_rect)
 
+          
             pygame.draw.rect(
                 screen,
                 (180, 150, 220),
-                company["sell_button"],
+                sell_button,
                 border_radius=12
             )
 
@@ -99,9 +106,8 @@ async def main():
                 (255, 255, 255)
             )
 
-            screen.blit(sell_text, (720, y_position + 2))
-
-            y_position += 60
+            sell_text_rect = sell_text.get_rect(center=sell_button.center)
+            screen.blit(sell_text, sell_text_rect)
         
 
         pygame.display.flip()
