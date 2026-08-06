@@ -36,7 +36,7 @@ companies = [
 ]
 
 PRICE_UPDATE = pygame.USEREVENT + 1
-pygame.time.set_timer(PRICE_UPDATE, 7000)
+pygame.time.set_timer(PRICE_UPDATE, 20000)
 
 def draw_button(button, color, label):
     pygame.draw.rect(
@@ -71,6 +71,21 @@ def draw_price_graph(history, x, y, width, height):
     for price in history: #goes through every price in history
         point_x = x + index * space_between_points
         index += 1 #next dot moves more to the right
+        point_y = (y + height -((price - lowest_price) / price_range) * height)
+
+        points.append((point_x, point_y))
+
+    if history[-1] >= history[0]:
+        graph_color = GREEN
+    else:
+        graph_color = RED
+    pygame.draw.lines(
+        screen,
+        graph_color,
+        False,
+        points,
+        3
+    )
 
 
 async def main():
