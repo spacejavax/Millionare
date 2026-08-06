@@ -30,9 +30,9 @@ GRAY = (132, 119, 137)
 SHADOW = (230, 218, 226)
 
 companies = [
-    {"name": "Bigbanana:", "emoji": ":P",  "price": 50, "shares": 0, "risk": 5, "change": 0, "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
-    {"name": "BubbleUnicorn:", "emoji": ":D", "price": 70, "shares": 0, "risk": 15, "change": 0, "button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
-    {"name": "GummyBear:",  "emoji": ":3", "price": 150, "shares": 0, "risk": 40, "change": 0, "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
+    {"name": "Bigbanana:", "emoji": ":P",  "price": 50, "shares": 0, "risk": 5, "change": 0, "history": [50], "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
+    {"name": "BubbleUnicorn:", "emoji": ":D", "price": 70, "shares": 0, "risk": 15, "change": 0, "history": [75],"button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
+    {"name": "GummyBear:",  "emoji": ":3", "price": 150, "shares": 0, "risk": 40, "change": 0, "history": [150], "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
 ]
 
 PRICE_UPDATE = pygame.USEREVENT + 1
@@ -52,6 +52,27 @@ def draw_button(button, color, label):
     )
     text_rect = button_text.get_rect(center=button.center)
     screen.blit(button_text, text_rect)
+
+def draw_price_graph(history, x, y, width, height):
+    if len(history) < 2:
+        return
+    lowest_price = min(history)
+    highest_price = max(history)
+    price_range = highest_price - lowest_price
+
+    if price_range == 0:
+        price_range = 1
+    points = []
+
+    space_between_points = width / (len(history) -1) #space between dots on graph
+
+    index = 0 #first graph dot at 0
+
+    for price in history: #goes through every price in history
+        point_x = x + index * space_between_points
+        index += 1 #next dot moves more to the right
+
+
 async def main():
     cash = 1000
     day = 1
@@ -83,6 +104,7 @@ async def main():
                         company["price"] += price_change
                         if company["price"] < 5:
                             company["price"] = 5
+                            company["history"].append(company["price"])
                 day += 1
                 if day > MAX_DAYS:
                     day = MAX_DAYS
@@ -100,7 +122,7 @@ async def main():
                 DARK_PURPLE
             )
         subtitle = small_font.render(
-                "Build your kawai investment portfolio💛",
+                "Build your kawai investment portfolio:)",
                 True,
                 GRAY
             )
