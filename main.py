@@ -108,6 +108,8 @@ async def main():
 
             sell_text_rect = sell_text.get_rect(center=sell_button.center)
             screen.blit(sell_text, sell_text_rect)
+
+            y_position += 60
         
 
         pygame.display.flip()
