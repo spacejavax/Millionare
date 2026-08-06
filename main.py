@@ -15,9 +15,9 @@ title_font = pygame.font.Font(None, 64)
 text_font = pygame.font.Font(None, 34)
 
 companies = [
-    {"name": "Bigbanana:", "price": 50, "shares": 0, "button": pygame.Rect(650, 245, 100, 40)},
-    {"name": "BubbleUnicorn:", "price": 70, "shares": 0, "button": pygame.Rect(650, 305, 100, 40)},
-    {"name": "GummyBear:", "price": 150, "shares": 0, "button": pygame.Rect(650, 365, 100, 40)}
+    {"name": "Bigbanana:", "price": 50, "shares": 0, "button": pygame.Rect(650, 245, 100, 40), "sell_button": pygame.Rect(700, 245, 90, 40)},
+    {"name": "BubbleUnicorn:", "price": 70, "shares": 0, "button": pygame.Rect(650, 305, 100, 40), "sell_button": pygame.Rect(700, 245, 90, 40)},
+    {"name": "GummyBear:", "price": 150, "shares": 0, "button": pygame.Rect(650, 365, 100, 40), "sell_button": pygame.Rect(700, 245, 90, 40)}
 ]
 
 
@@ -84,7 +84,22 @@ async def main():
                 (255, 255, 255)
             )
 
-            screen.blit(buy_text, (677, y_position + 2))
+            screen.blit(buy_text, (610, y_position + 2))
+
+            pygame.draw.rect(
+                screen,
+                (180, 150, 220),
+                company["sell_button"],
+                border_radius=12
+            )
+
+            sell_text = text_font.render(
+                "sell",
+                True,
+                (255, 255, 255)
+            )
+
+            screen.blit(sell_text, (720, y_position + 2))
 
             y_position += 60
         
