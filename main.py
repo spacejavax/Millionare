@@ -29,9 +29,9 @@ GRAY = (132, 119, 137)
 SHADOW = (230, 218, 226)
 
 companies = [
-    {"name": "Bigbanana:", "price": 50, "shares": 0, "risk": 5, "change": 0, "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
-    {"name": "BubbleUnicorn:", "price": 70, "shares": 0, "risk": 15, "change": 0, "button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
-    {"name": "GummyBear:", "price": 150, "shares": 0, "risk": 40, "change": 0, "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
+    {"name": "Bigbanana:", "emoji": "🍌",  "price": 50, "shares": 0, "risk": 5, "change": 0, "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
+    {"name": "BubbleUnicorn:", "emoji": "🦄", "price": 70, "shares": 0, "risk": 15, "change": 0, "button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
+    {"name": "GummyBear:",  "emoji": "🐻", "price": 150, "shares": 0, "risk": 40, "change": 0, "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
 ]
 
 PRICE_UPDATE = pygame.USEREVENT + 1
@@ -99,7 +99,7 @@ async def main():
                 DARK_PURPLE
             )
         subtitle = small_font.render(
-                "Build your kawai investment portfolio",
+                "Build your kawai investment portfolio💛",
                 True,
                 GRAY
             )
@@ -184,18 +184,19 @@ async def main():
                 25
             )
 
-            company_letter = heading_font.render(company["name"][0], True, PINK)
+            company_emoji = heading_font.render(company["emoji"][0], True, PINK)
 
 
-            letter_rect = company_letter.get_rect(center=icon_center)
-            screen.blit(company_letter, letter_rect)
+            emoji_rect = company_emoji.get_rect(center=icon_center)
+            screen.blit(company_emoji, emoji_rect)
 
             name_text= text_font.render(company["name"], True, DARK_PURPLE)
 
             risk_text=small_font.render(f"Risk:{company['risk']}", True, GRAY)
-
+            price_text = text_font.render(f"${company['price']}", True, DARK_PURPLE)
             screen.blit(name_text, (140, card_y + 23))
             screen.blit(risk_text, (140, card_y + 53))
+            screen.blit(price_text, (330, card_y + 34))
 
             card_y +=110
 
