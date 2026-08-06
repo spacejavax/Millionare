@@ -29,13 +29,13 @@ GRAY = (132, 119, 137)
 SHADOW = (230, 218, 226)
 
 companies = [
-    {"name": "Bigbanana:", "emoji": ":P",  "price": 50, "shares": 0, "Risk": "5%", "change": 0, "history": [50], "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
-    {"name": "BubbleUnicorn:", "emoji": ":D", "price": 70, "shares": 0, "Risk": "15%", "change": 0, "history": [70],"button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
-    {"name": "GummyBear:",  "emoji": ":3", "price": 150, "shares": 0, "Risk": "30%", "change": 0, "history": [150], "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
+    {"name": "Bigbanana:", "emoji": ":P",  "price": 50, "shares": 0, "risk": 5, "change": 0, "history": [50], "button": pygame.Rect(610, 245, 90, 42), "sell_button": pygame.Rect(715, 245, 90, 42)},
+    {"name": "BubbleUnicorn:", "emoji": ":D", "price": 70, "shares": 0, "risk": 15, "change": 0, "history": [70],"button": pygame.Rect(610, 305, 90, 42), "sell_button": pygame.Rect(715, 305, 90, 42)},
+    {"name": "GummyBear:",  "emoji": ":3", "price": 150, "shares": 0, "risk": 30, "change": 0, "history": [150], "button": pygame.Rect(610, 365, 90, 42), "sell_button": pygame.Rect(715, 365, 90, 42)}
 ]
 
 PRICE_UPDATE = pygame.USEREVENT + 1
-pygame.time.set_timer(PRICE_UPDATE, 20000)
+pygame.time.set_timer(PRICE_UPDATE, 7500)
 
 def draw_button(button, color, label, enabled=True):
     mouse_position = pygame.mouse.get_pos()
@@ -56,8 +56,8 @@ def draw_button(button, color, label, enabled=True):
         visible_button = button
     pygame.draw.rect(
         screen,
-        color,
-        button,
+        button_color,
+        visible_button,
         border_radius=10
     )
     button_text = text_font.render(
@@ -65,7 +65,7 @@ def draw_button(button, color, label, enabled=True):
         True,
         WHITE
     )
-    text_rect = button_text.get_rect(center=button.center)
+    text_rect = button_text.get_rect(center=visible_button.center)
     screen.blit(button_text, text_rect)
 
 def draw_price_graph(history, x, y, width, height):
@@ -152,7 +152,7 @@ async def main():
                 DARK_PURPLE
             )
         subtitle = small_font.render(
-                "Build your kawai investment portfolio:)",
+                "How good are you at trading?? Let's find out:))",
                 True,
                 GRAY
             )
@@ -262,6 +262,15 @@ async def main():
             screen.blit(price_text, (330, card_y + 34))
             screen.blit(change_text, (420, card_y + 34))
             screen.blit(owned_text, (540, card_y + 34))
+
+            draw_price_graph(
+                company["history"],
+                575,
+                card_y + 25,
+                50,
+                40
+
+            )
 
             company["button"].update(
                     650,
