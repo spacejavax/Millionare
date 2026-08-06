@@ -59,7 +59,6 @@ async def main():
     running = True
 
     while running:
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                             
@@ -160,32 +159,33 @@ async def main():
 
         card_y = 235
         for company in companies:
-                shadow = pygame.Rect(65, card_y + 5, 770, 90)
-                card = pygame.Rect(65, card_y, 770, 90)
-        pygame.draw.rect(
-            screen,
-            SHADOW,
-            shadow,
-            border_radius=17
-        )
+            shadow = pygame.Rect(65, card_y + 5, 770, 90)
+            card = pygame.Rect(65, card_y, 770, 90)
+            pygame.draw.rect(
+                screen,
+                SHADOW,
+                shadow,
+                border_radius=17
+            )
 
-        pygame.draw.rect(
-            screen,
-            WHITE,
-            card,
-            border_radius=17
-        )
+            pygame.draw.rect(
+                screen,
+                WHITE,
+                card,
+                border_radius=17
+            )
 
-        icon_center = (100, card_y + 45)
+            icon_center = (100, card_y + 45)
 
-        pygame.draw.circle(
-            screen,
-            LIGHT_PINK,
-            icon_center,
-            25
-        )
+            pygame.draw.circle(
+                screen,
+                LIGHT_PINK,
+                icon_center,
+                25
+            )
 
         company_letter = heading_font.render(company["name"][0], True, PINK)
+
 
         letter_rect = company_letter.get_rect(center=icon_center)
         screen.blit(company_letter, letter_rect)
