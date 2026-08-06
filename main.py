@@ -87,80 +87,79 @@ async def main():
                 if day > MAX_DAYS:
                     day = MAX_DAYS
                     market_open = False
-            portfolio_value = sum(
-                company["price"] * company["shares"]
-                for company in companies
-            )  
+        portfolio_value = sum(
+            company["price"] * company["shares"]
+            for company in companies)  
 
-            total_wealth = cash + portfolio_value
+        total_wealth = cash + portfolio_value
 
-            screen.fill(BACKGROUND)
-            title = title_font.render(
+        screen.fill(BACKGROUND)
+        title = title_font.render(
                 "Millionaire",
                 True,
                 DARK_PURPLE
             )
-            subtitle = small_font.render(
+        subtitle = small_font.render(
                 "Build your kawai investment portfolio",
                 True,
                 GRAY
             )
-            screen.blit(title, (55, 28))
-            screen.blit(subtitle, (57, 75))
-            day_badge = pygame.Rect(720, 35, 125, 45)
-            pygame.draw.rect(
+        screen.blit(title, (55, 28))
+        screen.blit(subtitle, (57, 75))
+        day_badge = pygame.Rect(720, 35, 125, 45)
+        pygame.draw.rect(
                 screen,
                 LIGHT_PINK,
                 day_badge,
                 border_radius=20
             )
-            day_text = text_font.render(
+        day_text = text_font.render(
                 f"Day {day}/{MAX_DAYS}",
                 True,
                 DARK_PURPLE
             )
-            day_text_rect = day_text.get_rect(center=day_badge.center)
-            screen.blit(day_text, day_text_rect)
+        day_text_rect = day_text.get_rect(center=day_badge.center)
+        screen.blit(day_text, day_text_rect)
 
-            summary_shadow = pygame.Rect(60, 116, 780, 84)
-            summary_card = pygame.Rect(60, 111, 780, 84)
+        summary_shadow = pygame.Rect(60, 116, 780, 84)
+        summary_card = pygame.Rect(60, 111, 780, 84)
 
-            pygame.draw.rect(
+        pygame.draw.rect(
                 screen,
                 SHADOW,
                 summary_shadow,
                 border_radius=18
             )
 
-            pygame.draw.rect(
+        pygame.draw.rect(
                 screen,
                 WHITE,
                 summary_card,
                 border_radius=18
             )
 
-            cash_label = small_font.render("AVAILABLE CASH", True, GRAY)
-            cash_text = heading_font.render(f"${cash}", True, DARK_PURPLE)
+        cash_label = small_font.render("AVAILABLE CASH", True, GRAY)
+        cash_text = heading_font.render(f"${cash}", True, DARK_PURPLE)
 
-            portfolio_label = small_font.render("INVESTED", True, GRAY)
-            portfolio_text = small_font.render(f"${portfolio_value}", True, DARK_PURPLE)
+        portfolio_label = small_font.render("INVESTED", True, GRAY)
+        portfolio_text = small_font.render(f"${portfolio_value}", True, DARK_PURPLE)
 
-            wealth_label = small_font.render("TOTAL WEALTH", True, GRAY)
-            wealth_text = heading_font.render(f"${total_wealth}", True, GREEN)
-            screen.blit(cash_label, (95, 128))
-            screen.blit(cash_text, (95, 153))
-            screen.blit(portfolio_label, (355, 128))
-            screen.blit(portfolio_text, (355, 153))
-            screen.blit(wealth_label, (610, 128))
-            screen.blit(wealth_text, (610, 153))
+        wealth_label = small_font.render("TOTAL WEALTH", True, GRAY)
+        wealth_text = heading_font.render(f"${total_wealth}", True, GREEN)
+        screen.blit(cash_label, (95, 128))
+        screen.blit(cash_text, (95, 153))
+        screen.blit(portfolio_label, (355, 128))
+        screen.blit(portfolio_text, (355, 153))
+        screen.blit(wealth_label, (610, 128))
+        screen.blit(wealth_text, (610, 153))
 
-            screen.blit(small_font.render("COMPANY", True, GRAY), (95,215))
-            screen.blit(small_font.render("PRICE", True, GRAY), (330, 215))
-            screen.blit(small_font.render("CHANGE", True, GRAY), (420, 215))
-            screen.blit(small_font.render("OWNED", True, GRAY), (525, 215))
+        screen.blit(small_font.render("COMPANY", True, GRAY), (95,215))
+        screen.blit(small_font.render("PRICE", True, GRAY), (330, 215))
+        screen.blit(small_font.render("CHANGE", True, GRAY), (420, 215))
+        screen.blit(small_font.render("OWNED", True, GRAY), (525, 215))
 
-            card_y = 235
-            for company in companies:
+        card_y = 235
+        for company in companies:
                 shadow = pygame.Rect(65, card_y + 5, 770, 90)
                 card = pygame.Rect(65, card_y, 770, 90)
         pygame.draw.rect(
@@ -186,8 +185,17 @@ async def main():
             25
         )
 
+        company_letter = heading_font.render( company["name"][0], True, PINK)
 
-            
+        letter_rect = company_letter.get_rect(center=icon_center)
+        screen.blit(company_letter, letter_rect)
+
+        name_text= text_font.render(company["name"], True, DARK_PURPLE)
+
+        risk_text=small_font.render(f"Risk: {company['risk']}", True, GRAY)
+
+
+
         pygame.display.flip()
 
         clock.tick(60)
