@@ -184,20 +184,20 @@ async def main():
                 25
             )
 
-        company_letter = heading_font.render(company["name"][0], True, PINK)
+            company_letter = heading_font.render(company["name"][0], True, PINK)
 
 
-        letter_rect = company_letter.get_rect(center=icon_center)
-        screen.blit(company_letter, letter_rect)
+            letter_rect = company_letter.get_rect(center=icon_center)
+            screen.blit(company_letter, letter_rect)
 
-        name_text= text_font.render(company["name"], True, DARK_PURPLE)
+            name_text= text_font.render(company["name"], True, DARK_PURPLE)
 
-        risk_text=small_font.render(f"Risk:{company['risk']}", True, GRAY)
+            risk_text=small_font.render(f"Risk:{company['risk']}", True, GRAY)
 
-        screen.blit(name_text, (140, card_y + 23))
-        screen.blit(risk_text, (140, card_y + 53))
+            screen.blit(name_text, (140, card_y + 23))
+            screen.blit(risk_text, (140, card_y + 53))
 
-        card_y +=110
+            card_y +=110
 
 
 
