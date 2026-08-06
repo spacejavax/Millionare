@@ -120,7 +120,7 @@ async def main():
                 DARK_PURPLE
             )
             day_text_rect = day_text.get_rect(center=day_badge.center)
-            screen-blit(day_text, day_text_rect)
+            screen.blit(day_text, day_text_rect)
 
             summary_shadow = pygame.Rect(60, 116, 780, 84)
             summary_card = pygame.Rect(60, 111, 780, 84)
@@ -143,7 +143,7 @@ async def main():
             cash_text = heading_font.render(f"${cash}", True, DARK_PURPLE)
 
             portfolio_label = small_font.render("INVESTED", True, GRAY)
-            portfolio_label = small_font.render(f"${portfolio_value}", True, DARK_PURPLE)
+            portfolio_text = small_font.render(f"${portfolio_value}", True, DARK_PURPLE)
 
             wealth_label = small_font.render("TOTAL WEALTH", True, GRAY)
             wealth_text = heading_font.render(f"${total_wealth}", True, GREEN)
@@ -154,7 +154,7 @@ async def main():
             screen.blit(wealth_label, (610, 128))
             screen.blit(wealth_text, (610, 153))
 
-            screen.blit(small_font.render("COPMANY, True, GRAY"), (95,215))
+            screen.blit(small_font.render("COMPANY, True, GRAY"), (95,215))
             screen.blit(small_font.render("PRICE", True, GRAY), (330, 215))
             screen.blit(small_font.render("CHANGE", True, GRAY), (420, 215))
             screen.blit(small_font.render("OWNED", True, GRAY), (525, 215))
