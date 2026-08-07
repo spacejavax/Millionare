@@ -22,8 +22,6 @@ On Windows powershell try
 ```sh
 py main.py
 ```
-(This is run on pybag)
-
 Hope you earn some big bucks!
 
 ## Information about the Millionaire game//How to play??
@@ -44,6 +42,8 @@ I started building a pygame window with titles and the amount of cash you could 
 ## Challenges
 Hardest part for this stock market game was creating the graph. I did not know python used reversed coordinates. It was hard figuring out how to solve it in code. Another challange I faced was making sure the buttons for sell and buy was correctly placed. Sometimes they overlapped, sometimes they were too far from each other. 
 
+Oh! I really have to add this. I was so stressed because this game would not run on vercel, or itch.io. It was something wrong with pygbag browser, screen was black and not loading. But luckily hack club has an amazing guide and I tried to use pyinstaller. I used it to make the game a downloadable Windows application. Now it finally works! 
+
 ## AI DISCLOSURE
 I used AI when I got stuck. For example the challange i faced:P. I also asked it to explain the logic throroughly to really understand. Also identifying bugs (I often misspelled things...)
 
@@ -54,5 +54,9 @@ I used AI when I got stuck. For example the challange i faced:P. I also asked it
 
 ## Demolink
 
+The game can be downloaded from the itch.io demo link below. Download. Then click the file `Millionaire_web.zip`, to run the game. Maybe you need to extract the zip file first too (I did not need to do it though)
 
+Link to download: https://spacejavaxq.itch.io/millionaire
+
+Windows may display a warning (it was like that for me). Click **More info** and then **Run anyway**. The source code is available in this repository.
 
